@@ -1,0 +1,14 @@
+{
+  "name": "Jornada Milionária — Planeador",
+  "short_name": "Jornada JM",
+  "description": "Planeador pessoal de estudos, hábitos, projetos e metas de 90 dias.",
+  "lang": "pt-PT",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#0f1729",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

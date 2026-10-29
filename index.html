@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f1729" id="themeMeta">
+  <meta name="description" content="Planeador pessoal de 90 dias para universidade, inglês, programação, cibersegurança e projetos.">
+  <title>Jornada Milionária — Planeador</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <script>
+    (function(){try{var t=localStorage.getItem("jm_theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-view="dashboard">
+
+<!-- Ícones -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2.5"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-notes" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M19 3v4M21 5h-4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 22c4 0 7-3 7-7 0-3-2-5-3-7-1 2-2 3-3 3 0-4-2-7-5-9 0 4-3 6-3 11 0 5 3 9 7 9Z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8M15 7h6v6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-clock-s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  </defs>
+</svg>
+
+<div class="overlay" id="overlay" hidden></div>
+
+<header class="topbar">
+  <button id="menuBtn" class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="brand"><div class="brand-mark">JM</div><div class="brand-text"><strong>Jornada Milionária</strong><small>O teu sistema de desenvolvimento</small></div></div>
+  <div class="top-actions">
+    <span id="connection" class="pill"><i></i><b>…</b></span>
+    <button id="installBtn" class="btn btn-soft hidden" type="button"><svg class="ico"><use href="#i-download"/></svg><span>Instalar</span></button>
+    <button id="themeBtn" class="icon-btn" type="button" aria-label="Alternar tema claro/escuro"><svg class="ico" id="themeIcon"><use href="#i-moon"/></svg></button>
+  </div>
+</header>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+    <div class="sidebar-head">
+      <div class="brand"><div class="brand-mark">JM</div><div class="brand-text"><strong>Jornada Milionária</strong><small>Planeador pessoal</small></div></div>
+      <button class="icon-btn ghost" id="closeMenu" type="button" aria-label="Fechar menu"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <nav class="nav-list">
+      <button class="nav active" data-view="dashboard" type="button"><svg class="ico"><use href="#i-dashboard"/></svg><span>Painel geral</span></button>
+      <button class="nav" data-view="schedule" type="button"><svg class="ico"><use href="#i-clock"/></svg><span>Horário diário</span></button>
+      <button class="nav" data-view="calendar" type="button"><svg class="ico"><use href="#i-calendar"/></svg><span>Calendário</span></button>
+      <button class="nav" data-view="tasks" type="button"><svg class="ico"><use href="#i-check"/></svg><span>Tarefas</span></button>
+      <button class="nav" data-view="goals" type="button"><svg class="ico"><use href="#i-target"/></svg><span>Plano de 90 dias</span></button>
+      <button class="nav" data-view="notes" type="button"><svg class="ico"><use href="#i-notes"/></svg><span>Notas e revisão</span></button>
+      <button class="nav" data-view="assistant" type="button"><svg class="ico"><use href="#i-spark"/></svg><span>Assistente IA</span></button>
+      <button class="nav" data-view="settings" type="button"><svg class="ico"><use href="#i-settings"/></svg><span>Definições</span></button>
+    </nav>
+    <div class="sidebar-note"><strong>Regra principal</strong><p>Universidade primeiro. Progresso consistente, sem sacrificar o sono.</p></div>
+  </aside>
+
+  <main id="main" class="main-content">
+
+    <!-- PAINEL -->
+    <section class="view" id="view-dashboard">
+      <div class="hero">
+        <div class="hero-text">
+          <p class="eyebrow" id="todayLabel">HOJE</p>
+          <h1 id="greeting">Vamos avançar, um dia de cada vez.</h1>
+          <p class="hero-sub" id="heroSub">Um sistema simples para manter o foco nos próximos 90 dias.</p>
+          <button class="btn btn-primary" id="quickAdd" type="button"><svg class="ico"><use href="#i-plus"/></svg>Nova tarefa</button>
+        </div>
+        <div class="ring-wrap" aria-label="Progresso de hoje">
+          <div class="ring" id="todayRing"><div class="ring-inner"><strong id="todayRingText">0%</strong><small>hoje</small></div></div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon s-green"><svg class="ico"><use href="#i-check"/></svg></div><span>Tarefas concluídas</span><strong id="doneCount">0</strong><small id="taskCountLabel">de 0 tarefas</small></article>
+        <article class="stat-card"><div class="stat-icon s-orange"><svg class="ico"><use href="#i-trend"/></svg></div><span>Progresso do plano</span><strong id="planPercent">0%</strong><div class="progress"><span id="planProgress"></span></div></article>
+        <article class="stat-card"><div class="stat-icon s-red"><svg class="ico"><use href="#i-flame"/></svg></div><span>Sequência de estudo</span><strong id="streakCount">0 dias</strong><small>Com base nos registos diários</small></article>
+        <article class="stat-card"><div class="stat-icon s-blue"><svg class="ico"><use href="#i-bell"/></svg></div><span>Próximo lembrete</span><strong id="nextReminder">—</strong><small id="nextReminderSub">Adiciona uma tarefa com hora</small></article>
+      </div>
+
+      <div class="content-grid">
+        <article class="panel"><div class="panel-heading"><div><h2>Plano de hoje</h2><p class="muted">Marca o que concluíste.</p></div><button class="text-btn" data-go="tasks" type="button">Ver tarefas →</button></div><div id="todayTasks" class="task-list"></div></article>
+        <article class="panel"><div class="panel-heading"><div><h2>Foco desta semana</h2><p class="muted">Equilíbrio sem excesso.</p></div></div><div id="weeklyFocus" class="focus-list"></div></article>
+      </div>
+      <article class="panel"><div class="panel-heading"><div><h2>Os teus cinco pilares</h2><p class="muted">Acompanha as áreas que estás a desenvolver.</p></div></div><div id="pillarGrid" class="pillar-grid"></div></article>
+    </section>
+
+    <!-- HORÁRIO -->
+    <section class="view hidden" id="view-schedule">
+      <div class="page-heading"><div><p class="eyebrow">ROTINA</p><h1>Horário diário</h1><p class="muted">Horário-base adaptado às aulas das 13h às 17h e chegada a casa às 21h.</p></div><button class="btn btn-quiet" id="resetSchedule" type="button">Restaurar horário-base</button></div>
+      <article class="panel"><div class="notice">O horário é editável. Se estiveres cansado, prioriza descanso e sono. O bloco profissional pode ser reduzido ou ignorado em semanas de testes.</div><div id="scheduleList" class="schedule-list"></div></article>
+    </section>
+
+    <!-- CALENDÁRIO -->
+    <section class="view hidden" id="view-calendar">
+      <div class="page-heading cal-heading">
+        <div><p class="eyebrow">PLANEAMENTO</p><h1>Calendário</h1><p class="muted" id="monthStats">—</p></div>
+        <div class="month-controls">
+          <button class="btn btn-quiet today-btn" id="todayMonth" type="button">Hoje</button>
+          <div class="month-nav">
+            <button class="icon-btn" id="prevMonth" type="button" aria-label="Mês anterior"><svg class="ico"><use href="#i-left"/></svg></button>
+            <strong id="monthLabel" aria-live="polite"></strong>
+            <button class="icon-btn" id="nextMonth" type="button" aria-label="Mês seguinte"><svg class="ico"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="cal-layout">
+        <article class="panel cal-panel">
+          <div class="calendar-weekdays" aria-hidden="true"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+          <div id="calendarGrid" class="calendar-grid" role="group" aria-label="Calendário mensal"></div>
+          <div class="legend" id="calLegend"></div>
+        </article>
+        <aside class="panel day-panel" id="dayPanel">
+          <div class="day-panel-head">
+            <div><p class="eyebrow" id="selectedWeekday">DIA</p><h2 id="selectedDateTitle">Tarefas do dia</h2><p class="muted small" id="selectedSummary"></p></div>
+            <button class="btn btn-primary btn-sm" id="calendarAdd" type="button"><svg class="ico"><use href="#i-plus"/></svg>Adicionar</button>
+          </div>
+          <div id="selectedDateTasks" class="task-list"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TAREFAS -->
+    <section class="view hidden" id="view-tasks">
+      <div class="page-heading"><div><p class="eyebrow">EXECUÇÃO</p><h1>Tarefas</h1><p class="muted">Transforma objetivos em próximos passos claros.</p></div><button class="btn btn-primary" id="addTaskBtn" type="button"><svg class="ico"><use href="#i-plus"/></svg>Nova tarefa</button></div>
+      <article class="panel">
+        <div class="filters"><input id="taskSearch" type="search" placeholder="Pesquisar tarefas…" aria-label="Pesquisar tarefas"><select id="taskFilter" aria-label="Estado"><option value="all">Todas</option><option value="open">Por fazer</option><option value="done">Concluídas</option></select><select id="categoryFilter" aria-label="Área"><option value="all">Todas as áreas</option><option>Universidade</option><option>Programação</option><option>Cibersegurança</option><option>Inglês</option><option>EduMind</option><option>Pessoal</option></select></div>
+        <div id="allTasks" class="task-list"></div>
+      </article>
+    </section>
+
+    <!-- PLANO -->
+    <section class="view hidden" id="view-goals">
+      <div class="page-heading"><div><p class="eyebrow">90 DIAS</p><h1>Plano de desenvolvimento</h1><p class="muted">Três fases com resultados concretos.</p></div><div class="date-chip" id="planDates">Plano por iniciar</div></div>
+      <div class="phase-grid" id="phaseGrid"></div>
+      <article class="panel"><div class="panel-heading"><div><h2>Metas pessoais</h2><p class="muted">Edita o que significa progresso para ti.</p></div><button class="btn btn-primary btn-sm" id="addGoal" type="button"><svg class="ico"><use href="#i-plus"/></svg>Nova meta</button></div><div id="goalList" class="goal-list"></div></article>
+    </section>
+
+    <!-- NOTAS -->
+    <section class="view hidden" id="view-notes">
+      <div class="page-heading"><div><p class="eyebrow">REFLEXÃO</p><h1>Notas e revisão semanal</h1><p class="muted">Aprende com a semana, sem te julgares.</p></div><button class="btn btn-primary" id="saveNotes" type="button">Guardar revisão</button></div>
+      <article class="panel notes-panel"><label for="weekWins">O que correu bem?</label><textarea id="weekWins" rows="3" placeholder="Ex.: resolvi exercícios de Estrutura de Dados sem copiar…"></textarea><label for="weekChallenges">O que foi difícil?</label><textarea id="weekChallenges" rows="3" placeholder="Ex.: ainda tenho dificuldades em limites…"></textarea><label for="weekNext">Três prioridades para a próxima semana</label><textarea id="weekNext" rows="3" placeholder="1. …&#10;2. …&#10;3. …"></textarea><p id="notesStatus" class="muted small"></p></article>
+    </section>
+
+    <!-- ASSISTENTE -->
+    <section class="view hidden" id="view-assistant">
+      <div class="page-heading"><div><p class="eyebrow">ASSISTENTE PESSOAL</p><h1>Assistente inteligente</h1><p class="muted">Ajuda para organizar estudos e transformar objetivos em passos concretos.</p></div><span class="date-chip">Modo local · Offline</span></div>
+      <div class="assistant-layout">
+        <article class="panel assistant-main">
+          <div class="assistant-banner"><div class="assistant-avatar"><svg class="ico"><use href="#i-spark"/></svg></div><div><strong>Olá! Vamos organizar o teu próximo passo.</strong><p>Posso analisar as tuas tarefas, sugerir prioridades e dividir um objetivo em etapas. Funciona sem Internet, mas não é um modelo generativo ligado à cloud.</p></div></div>
+          <div id="aiMessages" class="ai-messages" aria-live="polite"><div class="ai-message bot"><strong>Assistente JM</strong><p>Experimenta perguntar: “O que devo estudar hoje?”, “Ajuda-me com CDI 1” ou “Divide o EduMind em tarefas”.</p></div></div>
+          <div class="suggestion-chips"><button type="button" data-ai-prompt="O que devo estudar hoje?">Prioridades de hoje</button><button type="button" data-ai-prompt="Ajuda-me a organizar a semana">Organizar semana</button><button type="button" data-ai-prompt="Divide o EduMind em tarefas">Planear EduMind</button></div>
+          <form id="aiForm" class="ai-input-row"><textarea id="aiPrompt" rows="1" placeholder="Escreve a tua pergunta…" aria-label="Pergunta ao assistente"></textarea><button class="btn btn-primary" type="submit" aria-label="Enviar"><svg class="ico"><use href="#i-send"/></svg><span class="hide-sm">Enviar</span></button></form>
+          <p class="muted small ai-privacy">Privacidade: as perguntas são processadas localmente no navegador e não são enviadas para um servidor.</p>
+        </article>
+        <article class="panel"><h2>O que posso fazer</h2><div class="ai-capability"><span>✓</span><div><strong>Priorizar tarefas</strong><p>Considera datas, tarefas pendentes e áreas de estudo.</p></div></div><div class="ai-capability"><span>✓</span><div><strong>Dividir objetivos</strong><p>Cria passos pequenos para estudar ou avançar um projeto.</p></div></div><div class="ai-capability"><span>✓</span><div><strong>Rever hábitos</strong><p>Ajuda a planear sem sobrecarregar a tua rotina.</p></div></div><div class="notice">Esta versão usa regras locais, não um modelo de IA generativa. Para respostas avançadas de um modelo online, seria necessário configurar uma API através de um backend seguro.</div></article>
+      </div>
+    </section>
+
+    <!-- DEFINIÇÕES -->
+    <section class="view hidden" id="view-settings">
+      <div class="page-heading"><div><p class="eyebrow">PERSONALIZAÇÃO</p><h1>Definições</h1><p class="muted">Configura lembretes, datas e cópias de segurança.</p></div></div>
+      <article class="panel settings-panel">
+        <h2>Aparência</h2>
+        <div class="setting-row"><div><strong>Tema</strong><small>Alterna entre claro e escuro.</small></div><button id="themeBtn2" class="btn btn-quiet" type="button">Alternar tema</button></div>
+        <div class="divider"></div>
+        <h2>Plano de 90 dias</h2><label for="startDate">Data de início</label><input type="date" id="startDate"><p class="muted small">O plano termina 89 dias depois da data de início.</p>
+        <div class="divider"></div><h2>Notificações</h2><p class="muted">As notificações locais funcionam quando o navegador permite e a aplicação está aberta. Para alertas fiáveis com a aplicação fechada é necessário configurar push num servidor.</p>
+        <div class="setting-row"><div><strong>Permissão de notificações</strong><small id="notificationStatus">Ainda não configurada</small></div><button id="enableNotifications" class="btn btn-primary" type="button">Ativar notificações</button></div>
+        <div class="setting-row"><div><strong>Lembrete diário</strong><small>Hora a que queres receber o lembrete, se a app estiver ativa.</small></div><input type="time" id="dailyReminder" value="08:00"></div>
+        <div class="setting-row"><div><strong>Testar notificação</strong><small>Envia uma notificação de teste.</small></div><button id="testNotification" class="btn btn-quiet" type="button">Testar</button></div>
+        <div class="setting-row"><div><strong>Notificações de tarefas</strong><small>Ativa o lembrete numa tarefa ao criá-la ou editá-la. A app precisa de estar ativa para verificar a hora.</small></div><span class="tag">Local</span></div>
+        <div class="divider"></div><h2>Dados e privacidade</h2><p class="muted">Os teus dados são guardados neste navegador, neste dispositivo. Não existe sincronização automática entre dispositivos.</p>
+        <div class="button-row"><button id="exportData" class="btn btn-quiet" type="button">Exportar cópia JSON</button><label class="btn btn-quiet file-label">Importar cópia JSON<input type="file" id="importData" accept=".json,application/json" hidden></label><button id="clearData" class="btn btn-danger" type="button">Apagar todos os dados</button></div>
+      </article>
+    </section>
+
+    <footer class="footer"><span>Jornada Milionária · versão 2.0</span><span id="saveState">Dados guardados neste dispositivo</span></footer>
+  </main>
+</div>
+
+<button class="fab" id="fab" type="button" aria-label="Nova tarefa"><svg class="ico"><use href="#i-plus"/></svg></button>
+
+<dialog id="taskDialog" class="modal">
+  <form id="taskForm" method="dialog">
+    <div class="sheet-grip" aria-hidden="true"></div>
+    <div class="modal-heading"><div><p class="eyebrow">PLANEAMENTO</p><h2 id="taskDialogTitle">Nova tarefa</h2></div><button type="button" class="icon-btn" id="closeTaskDialog" aria-label="Fechar"><svg class="ico"><use href="#i-x"/></svg></button></div>
+    <input type="hidden" id="taskId">
+    <label for="taskTitle">Tarefa</label>
+    <input id="taskTitle" required maxlength="120" placeholder="Ex.: Resolver 5 exercícios de CDI">
+    <div class="form-grid">
+      <div><label for="taskCategory">Área</label><select id="taskCategory"><option>Universidade</option><option>Programação</option><option>Cibersegurança</option><option>Inglês</option><option>EduMind</option><option>Pessoal</option></select></div>
+      <div><label for="taskDate">Data</label><input type="date" id="taskDate" required></div>
+      <div><label for="taskTime">Hora (opcional)</label><input type="time" id="taskTime"></div>
+      <div><label for="taskDuration">Duração</label><select id="taskDuration"><option value="15">15 min</option><option value="25">25 min</option><option value="45" selected>45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></div>
+    </div>
+    <label for="taskDetails">Notas (opcional)</label>
+    <textarea id="taskDetails" rows="2" placeholder="O que significa concluir esta tarefa?"></textarea>
+    <label class="check-label"><input type="checkbox" id="taskReminder"> Pedir lembrete enquanto a aplicação estiver aberta</label>
+    <div class="modal-actions"><button type="button" class="btn btn-quiet" id="cancelTask">Cancelar</button><button type="submit" class="btn btn-primary">Guardar tarefa</button></div>
+  </form>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
